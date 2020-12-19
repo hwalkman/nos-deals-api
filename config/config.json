@@ -1,0 +1,32 @@
+{
+  "development": {
+    "username": "root",
+    "password": "motdepasse",
+    "database": "development_nosdeals",
+    "host": "localhost",
+    "dialect": "mysql",
+    "socket": "/Applications/MAMP/tmp/mysql/mysql.sock",
+    "port": "8889"
+  
+  },
+  "test": {
+    "username": "root",
+    "password": "motdepasse",
+    "database": "test_nosdeals",
+    "host": "localhost",
+    "dialect": "mysql",
+    "socket": "/Applications/MAMP/tmp/mysql/mysql.sock",
+    "port":"8889"
+
+  },
+  "production": {
+    "username": "root",
+    "password": "motdepasse",
+    "database": "production_nosdeals",
+    "host": "localhost",
+    "dialect": "mysql",
+    "socket": "/Applications/MAMP/tmp/mysql/mysql.sock",
+    "port":"8889"
+
+  }
+}
