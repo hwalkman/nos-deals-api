@@ -14,6 +14,11 @@ module.exports = (sequelize, DataTypes) => {
 
       models.Users.hasMany(models.Vehicles);
       models.Users.hasMany(models.Properties);
+      models.Users.hasMany(models.Class);
+      models.Users.hasMany(models.Prestations);
+      models.Users.hasMany(models.Events);
+
+
 
     }
   };
