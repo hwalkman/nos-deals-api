@@ -12,7 +12,9 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
 
-      models.Vehicles.hasMany(models.Cars);
+      models.Vehicles.hasOne(models.Cars);
+      models.Vehicles.hasOne(models.Motorbikes);
+      
       models.Vehicles.belongsTo(models.Users, {
         foreingkey: {
           allowNull: false,
@@ -26,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
   Vehicles.init({
     userId: DataTypes.INTEGER,
     name: DataTypes.STRING,
+    category: DataTypes.STRING,
     brand: DataTypes.STRING,
     model: DataTypes.STRING,
     mileage: DataTypes.STRING,

@@ -1,7 +1,8 @@
 // imports
 var express = require('express');
 var usersCtrl = require('./routes/usersCtrl');
-var carsCtrl = require('./routes/cars');
+var carsCtrl = require('./routes/carsCtrl');
+var motorbikeCtrl = require('./routes/motorbikeCtrl');
 
 
 //Router
@@ -17,6 +18,10 @@ exports.router = (function() {
     // Cars routes
     apiRouter.route('/user/vehicle/newCar').post(carsCtrl.newCars);
     apiRouter.route('/user/vehicle/car').get(carsCtrl.getCars);
+
+    // Motobike route
+    apiRouter.route('/user/vehicle/newMotorbike').post(motorbikeCtrl.newMotorbike);
+    apiRouter.route('/user/vehicle/motorbike').get(motorbikeCtrl.getMotorbikes);
 
 
     return apiRouter;

@@ -16,6 +16,10 @@ module.exports = {
           key: 'id'
         }
       },
+      category: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       name: {
         type: Sequelize.STRING
       },

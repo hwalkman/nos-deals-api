@@ -9,7 +9,7 @@ const sequelize = require('sequelize');
 
 module.exports = {
 
-    newCars: (req, res) => {
+    newMotorbike: (req, res) => {
          // Authentification with token
 
         var headerAutho = req.headers['authorization'];
@@ -18,11 +18,15 @@ module.exports = {
        if(userId == -1) {
            return res.status(400).json({'error' : 'wrong token or token invalid'});
         }
+        if(req.body.category != 'motorbike') {
+            return res.status(400).json({'error' : 'wrong category ! choose right one'});
+        }
 
         // params
         models.Vehicles.create({
             userId: userId,
             name: req.body.name,
+            category: req.body.category,
             brand: req.body.brand,
             model: req.body.model,
             mileage: req.body.mileage,
@@ -31,15 +35,13 @@ module.exports = {
             description: req.body.description
         })
         .then((vehicle) => {
-            console.log("nbPlace : "+req.body.nbPlace+" gearbox : "+req.body.gearbox);
-            models.Cars.create({
+            models.Motorbikes.create({
                 vehicleId: vehicle.id,
-                nbPlace: req.body.nbPlace,
-                gearbox: req.body.gearbox
+                cylinder: req.body.cylinder
             })
-            .then((car) => {
+            .then((motorbike) => {
                 res.status(200).json({
-                    'id': car.id
+                    'id': motorbike.id
                 })
             })
             .catch((err) => {
@@ -56,7 +58,7 @@ module.exports = {
             })
         })
     },
-    getCars: ((req, res) => {
+    getMotorbikes: ((req, res) => {
         // Authentification with token
 
         var headerAutho = req.headers['authorization'];
@@ -67,22 +69,25 @@ module.exports = {
         }
 
         models.Vehicles.findAll({
-            where: {userId : userId},
+            where: {
+                userId : userId,
+                category: 'motorbike'
+            },
             include: [{
-                model: models.Cars,
+                model: models.Motorbikes,
                 where: {
                     vehicleId: sequelize.col('Vehicles.id'),
                 },
                 required: false
             }]
         })
-        .then((cars) => {
-            if(cars) res.status(200).json({'cars': cars});
+        .then((motorbike) => {
+            if(motorbike) res.status(200).json({'vehicle': motorbike});
         })
         .catch((err) => {
             console.log(err);
             res.status(500).json({
-                'car err': " can't get user's cars",
+                'car err': " can't get user's motorbike",
                 'error': err
             })
         })
