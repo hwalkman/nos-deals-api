@@ -25,5 +25,5 @@ server.use("/nos-deals/api/", apiRouter);
 // launched 
 
 server.listen(8080, function(){
-    console.log("server run on localhost:3000/nos-deals/api/"); 
+    console.log("server run on localhost:8080/nos-deals/api/"); 
 })

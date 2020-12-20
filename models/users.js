@@ -13,6 +13,8 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
 
       models.Users.hasMany(models.Vehicles);
+      models.Users.hasMany(models.Properties);
+
     }
   };
   Users.init({

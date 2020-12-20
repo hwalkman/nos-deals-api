@@ -3,7 +3,22 @@
 var models = require('./models');
 
 
-models.Cars.findAll({}).then((result) =>{
-  console.log(result);
+models.Biens.create({
+  userId: 1,
+  name: "maison à louer nzeng ayong",
+  type: "maison",
+  area: 100.5,
+  nbPlace: 7,
+  furnished: 1,
+  city: "libreville",
+  district: "nzeng ayong",
+  description: "disponible immédiatement"
 })
-.catch(err => console.log(err));
+.then((bien) => {
+  console.log(bien.id);
+})
+.catch((err) => {
+  if (err) {
+      console.log(err);
+  }    
+})

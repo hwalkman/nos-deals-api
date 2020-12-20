@@ -1,6 +1,5 @@
 // imports
 
-var bcrypt = require('bcrypt');
 var jwtUtils = require('../utils/jwt.utils');
 const models = require('../models');
 const sequelize = require('sequelize');
