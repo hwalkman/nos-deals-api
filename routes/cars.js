@@ -3,6 +3,7 @@
 var bcrypt = require('bcrypt');
 var jwtUtils = require('../utils/jwt.utils');
 const models = require('../models');
+const sequelize = require('sequelize');
 
 
 
@@ -19,32 +20,22 @@ module.exports = {
         }
 
         // params
-
-        var name = (req.body.name == undefined ? undefined:req.body.name);
-        var brand = (req.body.brand == undefined ? undefined:req.body.brand);
-        var model = (req.body.model == undefined ? undefined:req.body.model);
-        var mileage = (req.body.mileage == undefined ? undefined:req.body.mileage);
-        var color = (req.body.color == undefined ? undefined:req.body.color);
-        var price = (req.body.price == undefined ? undefined:req.body.price);
-        var description = (req.body.description == undefined ? undefined:req.body.description);
-        var nbPlace = (req.body.nbPlace == undefined ? undefined: req.body.nbPlace);
-        var gearbox = (req.body.gearbox == undefined ? undefined: req.body.gearbox);
-
         models.Vehicles.create({
             userId: userId,
-            name: name,
-            brand: brand,
-            model: model,
-            mileage: mileage,
-            color: color,
-            price: price,
-            description: description
+            name: req.body.name,
+            brand: req.body.brand,
+            model: req.body.model,
+            mileage: req.body.mileage,
+            color: req.body.color,
+            price: req.body.price,
+            description: req.body.description
         })
         .then((vehicle) => {
+            console.log("nbPlace : "+req.body.nbPlace+" gearbox : "+req.body.gearbox);
             models.Cars.create({
-                vehiclesId: vehicle.id,
-                nbPlace: nbPlace,
-                gearbox: gearbox
+                vehicleId: vehicle.id,
+                nbPlace: req.body.nbPlace,
+                gearbox: req.body.gearbox
             })
             .then((car) => {
                 res.status(200).json({
@@ -64,5 +55,36 @@ module.exports = {
                 'err':err
             })
         })
-    }
+    },
+    getCars: ((req, res) => {
+        // Authentification with token
+
+        var headerAutho = req.headers['authorization'];
+        var userId = jwtUtils.getUserId(headerAutho);
+ 
+        if(userId == -1) {
+            return res.status(400).json({'error' : 'wrong token or token invalid'});
+        }
+
+        models.Vehicles.findAll({
+            where: {userId : userId},
+            include: [{
+                model: models.Cars,
+                where: {
+                    vehicleId: sequelize.col('Vehicles.id'),
+                },
+                required: false
+            }]
+        })
+        .then((cars) => {
+            if(cars) res.status(200).json({'cars': cars});
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json({
+                'car err': " can't get user's cars",
+                'error': err
+            })
+        })
+    })
 }

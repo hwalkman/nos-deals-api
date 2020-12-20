@@ -16,6 +16,8 @@ exports.router = (function() {
 
     // Cars routes
     apiRouter.route('/user/vehicle/newCar').post(carsCtrl.newCars);
+    apiRouter.route('/user/vehicle/car').get(carsCtrl.getCars);
+
 
     return apiRouter;
 })();

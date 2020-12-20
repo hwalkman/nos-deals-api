@@ -13,7 +13,6 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
 
       models.Vehicles.hasMany(models.Cars);
-
       models.Vehicles.belongsTo(models.Users, {
         foreingkey: {
           allowNull: false,
@@ -21,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
           onUpdate: 'CASCADE'
         }
       })
+
     }
   };
   Vehicles.init({

@@ -11,17 +11,17 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      
       models.Cars.belongsTo(models.Vehicles, {
         foreignkey: {
-          allowNull: false,
-          onDelete: 'CASCADE',
-          onUpdate: 'CASCADE'
+          allowNull: false
         }
       })
     }
   };
+
   Cars.init({
-    vehiclesId: DataTypes.INTEGER,
+    vehicleId: DataTypes.INTEGER,
     nbPlace: DataTypes.INTEGER,
     gearbox: DataTypes.STRING
   }, {
