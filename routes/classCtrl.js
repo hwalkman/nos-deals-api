@@ -29,7 +29,7 @@ module.exports = ({
         })
         .catch((err) => {
             if (err) {
-                res.status(500).json({'err': "can't create user's bien "});
+                res.status(500).json({'err': "can't create user's class "});
                 console.log(err);
             }    
         })
@@ -50,7 +50,7 @@ module.exports = ({
             where: {userId: userId}
          })
          .then((classes) => {
-             if(classes) res.status(200).json({'biens': classes})
+             if(classes) res.status(200).json({'classes': classes})
          })
          .catch((err) => {
              if(err){

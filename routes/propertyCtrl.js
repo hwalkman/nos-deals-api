@@ -33,7 +33,7 @@ module.exports = ({
         })
         .catch((err) => {
             if (err) {
-                res.status(500).json({'err': "can't create user's bien "});
+                res.status(500).json({'err': "can't create user's property "});
                 console.log(err);
             }    
         })
@@ -54,7 +54,7 @@ module.exports = ({
             where: {userId: userId}
          })
          .then((property) => {
-             if(property) res.status(200).json({'biens': property})
+             if(property) res.status(200).json({'properties': property})
          })
          .catch((err) => {
              if(err){

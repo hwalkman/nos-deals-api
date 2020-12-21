@@ -48,7 +48,7 @@ module.exports = ({
             where: {userId: userId}
          })
          .then((prestation) => {
-             if(prestation) res.status(200).json({'biens': prestation})
+             if(prestation) res.status(200).json({'prestation': prestation})
          })
          .catch((err) => {
              if(err){

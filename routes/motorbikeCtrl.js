@@ -80,7 +80,7 @@ module.exports = {
             }]
         })
         .then((motorbike) => {
-            if(motorbike) res.status(200).json({'vehicle': motorbike});
+            if(motorbike) res.status(200).json({'motorbikes': motorbike});
         })
         .catch((err) => {
             console.log(err);

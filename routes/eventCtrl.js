@@ -50,7 +50,7 @@ module.exports = ({
             where: {userId: userId}
          })
          .then((event) => {
-             if(event) res.status(200).json({'biens': event})
+             if(event) res.status(200).json({'events': event})
          })
          .catch((err) => {
              if(err){

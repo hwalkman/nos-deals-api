@@ -85,7 +85,7 @@ module.exports = {
             }]
         })
         .then((cars) => {
-            if(cars) res.status(200).json({'vehicle': cars});
+            if(cars) res.status(200).json({'cars': cars});
         })
         .catch((err) => {
             console.log(err);
