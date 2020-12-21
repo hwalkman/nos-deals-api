@@ -6,7 +6,7 @@ var jwtUtils = require('../utils/jwt.utils');
 
 
 module.exports = ({
-    newProperty: ((req, res) => {
+    newPrestation: ((req, res) => {
         // Authentification
 
         var headerAutho = req.headers['authorization'];
@@ -16,31 +16,25 @@ module.exports = ({
            return res.status(400).json({'error' : 'wrong token or token invalid'});
         }
 
-        models.Properties.create({
+        models.Prestations.create({
             userId: userId,
             name: req.body.name,
-            type: req.body.type,
-            area: req.body.area,
-            nbPiece: req.body.nbPiece,
-            furnished: req.body.furnished,
-            city: req.body.city,
-            district: req.body.district,
             price: req.body.price,
             description: req.body.description
         })
-        .then((property) => {
-            if(property) res.status(200).json({'id':property.id});
+        .then((prestation) => {
+            if(prestation) res.status(200).json({'id':prestation.id});
         })
         .catch((err) => {
             if (err) {
-                res.status(500).json({'err': "can't create user's bien "});
+                res.status(500).json({'err': "can't create user's prestation "});
                 console.log(err);
             }    
         })
         
     }),
 
-    getProperties: ((req, res) => {
+    getPrestation: ((req, res) => {
          // Authentification
 
          var headerAutho = req.headers['authorization'];
@@ -50,15 +44,15 @@ module.exports = ({
             return res.status(400).json({'error' : 'wrong token or token invalid'});
          }
 
-         models.Properties.findAll({
+         models.Prestations.findAll({
             where: {userId: userId}
          })
-         .then((property) => {
-             if(property) res.status(200).json({'biens': property})
+         .then((prestation) => {
+             if(prestation) res.status(200).json({'biens': prestation})
          })
          .catch((err) => {
              if(err){
-                res.status(500).json({'err': "can't get user's biens"});
+                res.status(500).json({'err': "can't get user's prestations"});
                 console.log(err);
              }
              
