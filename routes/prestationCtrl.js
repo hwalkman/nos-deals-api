@@ -22,8 +22,8 @@ module.exports = ({
             price: req.body.price,
             description: req.body.description
         })
-        .then((prestation) => {
-            if(prestation) res.status(200).json({'id':prestation.id});
+        .then((prestations) => {
+            if(event) res.status(200).json(prestations[0])
         })
         .catch((err) => {
             if (err) {
@@ -47,8 +47,8 @@ module.exports = ({
          models.Prestations.findAll({
             where: {userId: userId}
          })
-         .then((prestation) => {
-             if(prestation) res.status(200).json({'prestation': prestation})
+         .then((prestations) => {
+             if(prestations) res.status(200).json(prestations)
          })
          .catch((err) => {
              if(err){

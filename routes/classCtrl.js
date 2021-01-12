@@ -50,7 +50,7 @@ module.exports = ({
             where: {userId: userId}
          })
          .then((classes) => {
-             if(classes) res.status(200).json({'classes': classes})
+            if(classes) res.status(200).json(classes)
          })
          .catch((err) => {
              if(err){

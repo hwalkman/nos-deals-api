@@ -28,8 +28,8 @@ module.exports = ({
             price: req.body.price,
             description: req.body.description
         })
-        .then((property) => {
-            if(property) res.status(200).json({'id':property.id});
+        .then((properties) => {
+            if(properties) res.status(200).json(properties);
         })
         .catch((err) => {
             if (err) {

@@ -79,8 +79,8 @@ module.exports = {
                 required: false
             }]
         })
-        .then((motorbike) => {
-            if(motorbike) res.status(200).json({'motorbikes': motorbike});
+        .then((motorbikes) => {
+            if(motorbikes) res.status(200).json(motorbikes)
         })
         .catch((err) => {
             console.log(err);

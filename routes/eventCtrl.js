@@ -41,7 +41,7 @@ module.exports = ({
 
          var headerAutho = req.headers['authorization'];
          var userId = jwtUtils.getUserId(headerAutho);
- 
+        
          if(userId == -1) {
             return res.status(400).json({'error' : 'wrong token or token invalid'});
          }
@@ -49,8 +49,8 @@ module.exports = ({
          models.Events.findAll({
             where: {userId: userId}
          })
-         .then((event) => {
-             if(event) res.status(200).json({'events': event})
+         .then((events) => {
+             if(events) res.status(200).json(events)
          })
          .catch((err) => {
              if(err){

@@ -72,12 +72,14 @@ module.exports = {
        
 
         models.Vehicles.findAll({
+            attributes:["name", "category", "price", "description","color", "brand","model","createdAt"],
             where: {
                 userId : userId,
                 category: 'car'
             },
             include: [{
                 model: models.Cars,
+                attributes: ["nbPlace", "gearbox"],
                 where: {
                     vehicleId: sequelize.col('Vehicles.id'),
                 },
@@ -85,7 +87,7 @@ module.exports = {
             }]
         })
         .then((cars) => {
-            if(cars) res.status(200).json({'cars': cars});
+            if(cars) res.status(200).json(cars)
         })
         .catch((err) => {
             console.log(err);
