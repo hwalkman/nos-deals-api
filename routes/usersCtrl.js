@@ -28,7 +28,8 @@ module.exports = {
                     })
                     .then(function(newUser) {
                         return res.status(200).json({
-                            'userId': newUser.id
+                            'token': jwtUtils.generateTokenForUser(newUser),
+                            'userName': newUser.userName
                         })
                     })
                     .catch(function(err) {
@@ -68,11 +69,11 @@ module.exports = {
                 bcrypt.compare(password, userFound.password, function(errBycrypt, resBycrypt){
                     if(resBycrypt){
                         return res.status(200).json({
-                            'userId': userFound.id,
+                            'userName': userFound.userName,
                             'token': jwtUtils.generateTokenForUser(userFound)
                         });
                     }else {
-                        return res.status(403).json({'error' : 'invalid password'});
+                        return res.status(403).send("L'utilisateur n'existe pas");
                     }
                 })
             }
